@@ -1,0 +1,295 @@
+/*
+Theme Name: BikeCraft
+Theme URI: https://example.com
+Author: Eduardo
+Author URI: https://example.com
+Description: Tema genérico para projetos WordPress
+Version: 1.0
+*/
+
+/* ================= Variáveis globais ================= */
+:root {
+  /* 🎨 Cores principais */
+  --color-primary: #fec63e;
+  --color-primary-dark: #e2b53e;
+
+  /* 🎨 Neutras */
+  --color-bg: #f7f7f7;
+  --color-text: #222;
+  --color-white: #ffffff;
+  --color-black: #000000;
+
+  /* 🎨 Header / Footer */
+  --color-header-start: #141414;
+  --color-header-end: #141414;
+
+  /* 🎨 Texto secundário */
+  --color-text-light: #e2dddd;
+
+  /* 🎨 Sombra */
+  --shadow-default: rgba(0, 0, 0, 0.2);
+}
+
+/* ================= Reset básico ================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-text);
+  padding-top: 5rem;
+}
+
+body.admin-bar {
+  padding-top: calc(5rem + 32px);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+p {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+ul {
+  list-style: none;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* ================= Header ================= */
+.site-header {
+  position: fixed;
+  width: 100%;
+  top: 0;
+  height: 5rem;
+  background: linear-gradient(
+    90deg,
+    var(--color-header-start) 0%,
+    var(--color-header-end) 100%
+  );
+  box-shadow: 0 2px 6px var(--shadow-default);
+  z-index: 1000;
+  transition: top 0.3s ease;
+  padding: 1rem 0;
+}
+
+body.admin-bar .site-header {
+  top: 32px;
+}
+
+.header-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 5%;
+  gap: 2rem;
+}
+
+.header-logo img {
+  max-height: 50px;
+  transition: transform 0.3s ease;
+}
+
+.header-logo img:hover {
+  transform: scale(1.05);
+}
+
+/* Navegação */
+.header-nav {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.header-nav ul {
+  display: flex;
+  gap: 1.5rem;
+  list-style: none;
+}
+
+.header-nav a {
+  position: relative;
+  text-transform: uppercase;
+  font-weight: bold;
+  font-family: "Montserrat", sans-serif;
+  color: var(--color-text-light);
+  transition: color 0.3s ease;
+}
+
+.header-nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -3px;
+  width: 0%;
+  height: 2px;
+  background-color: var(--color-text-light);
+  transition: width 0.3s ease;
+}
+
+.header-nav a:hover {
+  color: var(--color-white);
+}
+
+.header-nav a:hover::after {
+  width: 100%;
+}
+
+/* Botão CTA */
+.header-cta {
+  background: var(--color-primary);
+  color: var(--color-text);
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  font-weight: bold;
+  text-decoration: none;
+  transition:
+    background 0.3s ease,
+    transform 0.3s ease;
+}
+
+.header-cta:hover {
+  background: var(--color-primary-dark);
+  transform: scale(1.05);
+}
+
+/* Menu toggle (mobile) */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 1.8rem;
+  color: var(--color-text-light);
+  cursor: pointer;
+}
+
+/* ================= Responsividade ================= */
+@media (max-width: 768px) {
+  .header-container {
+    flex-direction: column;
+    gap: 10px;
+  }
+
+  .header-nav {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    text-align: center;
+  }
+
+  .header-nav.active {
+    display: flex;
+    margin-top: 10px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .header-cta {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ================= Footer ================= */
+.site-footer {
+  background-color: var(--color-black);
+  color: var(--color-white);
+  padding: 40px 0 20px;
+}
+
+.footer-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 30px;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.footer-info img {
+  max-height: 50px;
+  display: block;
+  margin-bottom: 10px;
+}
+
+.footer-info p {
+  font-size: 14px;
+  line-height: 1.6;
+}
+
+.footer-menu,
+.footer-socials {
+  flex: 1;
+}
+
+.footer-menu h3,
+.footer-socials h3 {
+  color: var(--color-primary);
+  text-transform: uppercase;
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+.footer-menu ul,
+.footer-socials ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.footer-menu li,
+.footer-socials li {
+  margin-bottom: 10px;
+}
+
+.footer-menu a,
+.footer-socials a {
+  color: var(--color-white);
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.footer-menu a:hover,
+.footer-socials a:hover {
+  color: var(--color-primary);
+}
+
+.footer-copy {
+  background: linear-gradient(
+    90deg,
+    var(--color-header-start) 0%,
+    var(--color-header-end) 100%
+  );
+  text-align: center;
+  padding: 15px 0;
+  margin-top: 20px;
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    gap: 20px;
+  }
+}

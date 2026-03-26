@@ -1,0 +1,90 @@
+/* ================= HOME ================= */
+
+.home-title {
+  text-align: center;
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* HERO */
+.home-hero {
+  background-size: cover;
+  background-position: center;
+  padding: 6rem 2rem;
+  color: var(--color-white);
+  text-align: center;
+}
+
+.home-hero__content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.home-hero__quote {
+  margin: 2rem 0;
+  font-style: italic;
+}
+
+/* BUTTON */
+.home-button {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-text);
+  padding: 0.7rem 1.5rem;
+  border-radius: 5px;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.home-button--dark {
+  background: var(--color-black);
+  color: var(--color-white);
+}
+
+/* PRODUCTS */
+.home-products {
+  padding: 4rem 2rem;
+}
+
+.home-products__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.home-products__item {
+  text-align: center;
+}
+
+.home-products__image img {
+  margin: 0 auto;
+}
+
+/* PORTFOLIO */
+.home-portfolio {
+  padding: 4rem 2rem;
+  background: var(--color-bg);
+}
+
+.home-portfolio__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+/* QUALITY */
+.home-quality {
+  padding: 4rem 2rem;
+}
+
+.home-quality__list {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+/* CTA */
+.home-cta {
+  margin-top: 2rem;
+  text-align: center;
+}
