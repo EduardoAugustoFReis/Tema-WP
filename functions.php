@@ -17,6 +17,7 @@ add_action('after_setup_theme', 'bikecraft_theme_setup');
 require get_template_directory() . '/inc/cmb2/home/home.php';
 require get_template_directory() . '/inc/cmb2/header/header.php';
 require get_template_directory() . '/inc/cmb2/footer/footer.php';
+require get_template_directory() . '/inc/cmb2/produtos/produtos.php';
 
 
 // =========================

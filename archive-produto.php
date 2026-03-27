@@ -1,36 +1,41 @@
 <?php get_header(); ?>
 
-<section class="product-page-container">
+<main>
 
-  <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+  <section class="product-page-container">
 
-      <article class="product-card">
+    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-        <a href="<?php the_permalink(); ?>" class="product-card__link">
+        <article class="product-card">
 
-          <div class="product-card__image">
-            <?php if (has_post_thumbnail()) : ?>
-              <?php the_post_thumbnail('medium'); ?>
-            <?php endif; ?>
-          </div>
+          <a href="<?php the_permalink(); ?>" class="product-card__link">
 
-          <div class="product-card__content">
-            <h2 class="product-card__title">
-              <?php the_title(); ?>
-            </h2>
+            <div class="product-card__image">
+              <?php if (has_post_thumbnail()) : ?>
+                <?php the_post_thumbnail('medium'); ?>
+              <?php endif; ?>
+            </div>
 
-            <p class="product-card__description">
-              <?php echo get_the_excerpt(); ?>
-            </p>
-          </div>
+            <div class="product-card__content">
+              <h2 class="product-card__title">
+                <?php the_title(); ?>
+              </h2>
 
-        </a>
+              <p class="product-card__description">
+                <?php echo get_the_excerpt(); ?>
+              </p>
+            </div>
 
-      </article>
+          </a>
 
-  <?php endwhile;
-  endif; ?>
+        </article>
 
-</section>
+    <?php endwhile;
+    endif; ?>
+
+  </section>
+
+</main>
+
 
 <?php get_footer(); ?>

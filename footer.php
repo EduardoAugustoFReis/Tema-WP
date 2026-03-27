@@ -11,6 +11,8 @@ $copyright = isset($footer_settings['footer_copyright'])
 	: '© ' . date('Y') . ' Meu Site - Todos os direitos reservados';
 ?>
 
+</main>
+
 <footer class="site-footer">
 	<div class="footer-container">
 

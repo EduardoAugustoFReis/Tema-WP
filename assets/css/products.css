@@ -60,3 +60,49 @@
     grid-template-columns: 1fr;
   }
 }
+
+.product-single {
+  padding: 3rem 2rem;
+}
+
+.product-single__container {
+  max-width: 1200px;
+  margin: 0 auto;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: start;
+}
+
+.product-single__image {
+  max-width: 500px;
+}
+
+.product-single__image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-single__content {
+  display: flex;
+  flex-direction: column;
+}
+
+.product-single__title {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.product-single__price {
+  font-size: 1.8rem;
+  font-weight: bold;
+  color: var(--color-primary);
+  margin-bottom: 1rem;
+}
+
+.product-single__description {
+  color: #555;
+  line-height: 1.6;
+}

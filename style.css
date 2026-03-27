@@ -38,10 +38,17 @@ Version: 1.0
 }
 
 body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
   font-family: Arial, sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
   padding-top: 5rem;
+}
+
+main {
+  flex: 1;
 }
 
 body.admin-bar {
@@ -292,4 +299,38 @@ body.admin-bar .site-header {
     flex-direction: column;
     gap: 20px;
   }
+}
+
+/* ================= LAYOUT GLOBAL ================= */
+.section {
+  padding: 4rem 2rem;
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* GRID RESPONSIVO PADRÃO */
+.grid {
+  display: grid;
+  gap: 2rem;
+}
+
+.grid-3 {
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+}
+
+/* CARD PADRÃO */
+.card {
+  background: var(--color-white);
+  padding: 1rem;
+  border-radius: 8px;
+  transition: 0.3s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 20px var(--shadow-default);
 }
