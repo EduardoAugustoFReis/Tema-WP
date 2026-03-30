@@ -28,6 +28,25 @@ Version: 1.0
 
   /* 🎨 Sombra */
   --shadow-default: rgba(0, 0, 0, 0.2);
+
+  /* ================= Tipografia ================= */
+  --font-size-sm: 0.875rem;
+  --font-size-md: 1rem;
+  --font-size-lg: 1.5rem;
+
+  /* ================= Espaçamentos ================= */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+
+  /* ================= Bordas ================= */
+  --radius-sm: 6px;
+  --radius-md: 8px;
+
+  /* ================= Inputs ================= */
+  --input-border: 1px solid #ddd;
+  --input-bg: #f9f9f9;
 }
 
 /* ================= Reset básico ================= */
@@ -58,7 +77,7 @@ body.admin-bar {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 20px;
+  padding: 1rem;
 }
 
 img {

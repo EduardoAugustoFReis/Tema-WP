@@ -18,10 +18,11 @@ require get_template_directory() . '/inc/cmb2/home/home.php';
 require get_template_directory() . '/inc/cmb2/header/header.php';
 require get_template_directory() . '/inc/cmb2/footer/footer.php';
 require get_template_directory() . '/inc/cmb2/produtos/produtos.php';
+require get_template_directory() . '/inc/cmb2/contatos/contato.php';
 
 
 // =========================
-// ENQUEUE DE CSS
+// ENQUEUE DE CSS - gerenciador de CSS
 // =========================
 function bikecraft_enqueue_assets()
 {
@@ -52,6 +53,16 @@ function bikecraft_enqueue_assets()
       filemtime(get_template_directory() . '/assets/css/products.css')
     );
   }
+
+  // CONTATO
+  if (is_page_template('page-contato.php')) {
+    wp_enqueue_style(
+      'bikecraft-contact',
+      get_template_directory_uri() . '/assets/css/contatos.css',
+      ['bikecraft-style'],
+      filemtime(get_template_directory() . '/assets/css/contatos.css')
+    );
+  }
 }
 
 add_action('wp_enqueue_scripts', 'bikecraft_enqueue_assets');
@@ -76,3 +87,68 @@ function bikecraft_register_produtos()
 }
 
 add_action('init', 'bikecraft_register_produtos');
+
+
+// Para usuários NÃO logados
+add_action('admin_post_nopriv_contato_form', 'handle_contato_form');
+
+// Para usuários logados
+add_action('admin_post_contato_form', 'handle_contato_form');
+
+function handle_contato_form()
+{
+  // Verifica campos obrigatórios
+  if (
+    empty($_POST['nome']) ||
+    empty($_POST['email']) ||
+    empty($_POST['mensagem'])
+  ) {
+    wp_redirect(wp_get_referer() . '?error=1');
+    exit;
+  }
+
+  if (!empty($_POST['leaveblank']) || $_POST['dontchange'] !== 'http://') {
+    wp_redirect(wp_get_referer() . '?error=1');
+    exit;
+  }
+
+  // Verifica nonce (segurança)
+  if (
+    !isset($_POST['contato_form_nonce']) ||
+    !wp_verify_nonce($_POST['contato_form_nonce'], 'contato_form_action')
+  ) {
+    wp_redirect(wp_get_referer() . '?error=1');
+    exit;
+  }
+
+  // Sanitização
+  $nome = sanitize_text_field($_POST['nome']);
+  $email = sanitize_email($_POST['email']);
+  $telefone = sanitize_text_field($_POST['telefone']);
+  $mensagem = sanitize_textarea_field($_POST['mensagem']);
+
+  // Validação de email
+  if (!is_email($email)) {
+    wp_redirect(wp_get_referer() . '?error=1');
+    exit;
+  }
+
+  // Monta email
+  $body = "Nome: $nome\n";
+  $body .= "Email: $email\n";
+  $body .= "Telefone: $telefone\n\n";
+  $body .= "Mensagem:\n$mensagem";
+
+  $to = get_option('admin_email');
+  $subject = 'Novo contato do site';
+
+  $enviado = wp_mail($to, $subject, $body);
+
+  if ($enviado) {
+    wp_redirect(wp_get_referer() . '?success=1');
+  } else {
+    wp_redirect(wp_get_referer() . '?error=1');
+  }
+
+  exit;
+}

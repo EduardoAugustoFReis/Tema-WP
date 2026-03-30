@@ -65,88 +65,89 @@ if (!$qualidade_link) {
 
 ?>
 
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<main>
 
-    <!-- HERO -->
-    <section class="home-hero" style="background-image: url('<?php echo esc_url($home['bg']); ?>');">
-      <div class="container">
-        <div class="home-hero__content">
-          <h1><?php the_title(); ?></h1>
+  <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-          <blockquote class="home-hero__quote">
-            <p><?php echo esc_html($home['frase']); ?></p>
-            <cite><?php echo esc_html($home['autor']); ?></cite>
-          </blockquote>
+      <!-- HERO -->
+      <section class="home-hero" style="background-image: url('<?php echo esc_url($home['bg']); ?>');">
+        <div class="container">
+          <div class="home-hero__content">
+            <h1><?php the_title(); ?></h1>
 
-          <a href="<?php echo esc_url($home['home_botao_link']); ?>" class="home-button">
-            <?php echo esc_html($home['home_botao_texto']); ?>
-          </a>
+            <blockquote class="home-hero__quote">
+              <p><?php echo esc_html($home['frase']); ?></p>
+              <cite><?php echo esc_html($home['autor']); ?></cite>
+            </blockquote>
+
+            <a href="<?php echo esc_url($home['home_botao_link']); ?>" class="home-button">
+              <?php echo esc_html($home['home_botao_texto']); ?>
+            </a>
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
 
-    <!-- PRODUTOS -->
-    <section class="home-products section">
-      <div class="container">
+      <!-- PRODUTOS -->
+      <section class="home-products section">
+        <div class="container">
 
-        <h2 class="home-title"><?php echo esc_html($produtos_titulo); ?></h2>
+          <h2 class="home-title"><?php echo esc_html($produtos_titulo); ?></h2>
 
-        <ul class="home-products__list grid grid-3">
-          <?php if ($produtos) : foreach ($produtos as $produto) : ?>
-              <li class="home-products__item card">
+          <ul class="home-products__list grid grid-3">
+            <?php if ($produtos) : foreach ($produtos as $produto) : ?>
+                <li class="home-products__item card">
 
-                <div class="home-products__image">
-                  <img src="<?php echo esc_url($produto['imagem_do_produto']); ?>" alt="">
-                </div>
+                  <div class="home-products__image">
+                    <img src="<?php echo esc_url($produto['imagem_do_produto']); ?>" alt="">
+                  </div>
 
-                <h3><?php echo esc_html($produto['titulo_do_produto']); ?></h3>
-                <p><?php echo esc_html($produto['descricao_do_produto']); ?></p>
+                  <h3><?php echo esc_html($produto['titulo_do_produto']); ?></h3>
+                  <p><?php echo esc_html($produto['descricao_do_produto']); ?></p>
 
+                </li>
+            <?php endforeach;
+            endif; ?>
+          </ul>
+
+          <div class="home-cta">
+            <p><?php echo esc_html($produtos_cta['texto']); ?></p>
+            <a href="<?php echo esc_url($link); ?>" class="home-button home-button--dark">
+              <?php echo esc_html($produtos_cta['botao']); ?>
+            </a>
+          </div>
+
+        </div>
+      </section>
+
+      <!-- QUALIDADE -->
+      <section class="home-quality section">
+        <div class="container">
+
+          <h2 class="home-title"><?php echo esc_html($qualidade['titulo']); ?></h2>
+
+          <ul class="home-quality__list grid grid-3">
+            <?php foreach ($qualidade['itens'] as $item) : ?>
+              <li class="home-quality__item card">
+                <h3><?php echo esc_html($item['titulo']); ?></h3>
+                <p><?php echo esc_html($item['descricao']); ?></p>
               </li>
-          <?php endforeach;
-          endif; ?>
-        </ul>
+            <?php endforeach; ?>
+          </ul>
 
-        <div class="home-cta">
-          <p><?php echo esc_html($produtos_cta['texto']); ?></p>
-          <a href="<?php echo esc_url($link); ?>" class="home-button home-button--dark">
-            <?php echo esc_html($produtos_cta['botao']); ?>
-          </a>
+          <div class="home-cta">
+            <p><?php echo esc_html($qualidade['cta_texto']); ?></p>
+            <a href="<?php echo esc_url($qualidade_link); ?>" class="home-button home-button--dark">
+              <?php echo esc_html($qualidade['cta_botao']); ?>
+            </a>
+          </div>
+
         </div>
+      </section>
 
-      </div>
-    </section>
+  <?php endwhile;
+  endif; ?>
 
-    <!-- QUALIDADE -->
-    <section class="home-quality section">
-      <div class="container">
-
-        <h2 class="home-title"><?php echo esc_html($qualidade['titulo']); ?></h2>
-
-        <ul class="home-quality__list grid grid-3">
-          <?php foreach ($qualidade['itens'] as $item) : ?>
-            <li class="home-quality__item card">
-              <h3><?php echo esc_html($item['titulo']); ?></h3>
-              <p><?php echo esc_html($item['descricao']); ?></p>
-            </li>
-          <?php endforeach; ?>
-        </ul>
-
-        <div class="home-cta">
-          <p><?php echo esc_html($qualidade['cta_texto']); ?></p>
-          <a href="<?php echo esc_url($qualidade_link); ?>" class="home-button home-button--dark">
-            <?php echo esc_html($qualidade['cta_botao']); ?>
-          </a>
-        </div>
-
-      </div>
-    </section>
-
-<?php endwhile;
-endif; ?>
-
-<?php get_footer(); ?>
-
+</main>
 
 
 <?php get_footer(); ?>
