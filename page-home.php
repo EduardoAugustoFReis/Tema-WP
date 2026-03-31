@@ -7,8 +7,6 @@ $id = get_the_ID();
 $home = [
   'frase' => get_post_meta($id, 'home_frase', true),
   'autor' => get_post_meta($id, 'home_autor', true),
-  'home_botao_texto' => get_post_meta($id, 'home_botao_texto', true),
-  'home_botao_link' => get_post_meta($id, 'home_botao_link', true),
   'bg' => get_post_meta($id, 'home_bg_imagem', true),
 ];
 
@@ -79,10 +77,6 @@ if (!$qualidade_link) {
               <p><?php echo esc_html($home['frase']); ?></p>
               <cite><?php echo esc_html($home['autor']); ?></cite>
             </blockquote>
-
-            <a href="<?php echo esc_url($home['home_botao_link']); ?>" class="home-button">
-              <?php echo esc_html($home['home_botao_texto']); ?>
-            </a>
           </div>
         </div>
       </section>

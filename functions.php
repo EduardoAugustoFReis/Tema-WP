@@ -19,6 +19,7 @@ require get_template_directory() . '/inc/cmb2/header/header.php';
 require get_template_directory() . '/inc/cmb2/footer/footer.php';
 require get_template_directory() . '/inc/cmb2/produtos/produtos.php';
 require get_template_directory() . '/inc/cmb2/contatos/contato.php';
+require get_template_directory() . '/inc/cmb2/sobre/sobre.php';
 
 
 // =========================
@@ -61,6 +62,16 @@ function bikecraft_enqueue_assets()
       get_template_directory_uri() . '/assets/css/contatos.css',
       ['bikecraft-style'],
       filemtime(get_template_directory() . '/assets/css/contatos.css')
+    );
+  }
+
+  // CONTATO
+  if (is_page_template('page-sobre.php')) {
+    wp_enqueue_style(
+      'bikecraft-contact',
+      get_template_directory_uri() . '/assets/css/sobre.css',
+      ['bikecraft-style'],
+      filemtime(get_template_directory() . '/assets/css/sobre.css')
     );
   }
 }

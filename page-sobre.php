@@ -1,54 +1,130 @@
-<?php 
+<?php
 // Template Name: Sobre
-get_header(); 
+get_header();
 ?>
 
-<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+<main class="sobre">
 
-	<?php include(TEMPLATEPATH . "/inc/introducao.php"); ?>
+	<?php if (have_posts()) : while (have_posts()) : the_post(); ?>
 
-	<section class="missao_sobre container animar-interno">
-		<div class="grid-10">
-			<h2 class="subtitulo-interno">História, Missão e Visão</h2>
-			<p>Quando iniciamos a Bikcraft queriamos apenas um produto que adoraríamos utilizar...</p>
-			<p>Conheça os nossos produtos, pergunte para os nossos clientes...</p>
-		</div>
+			<!-- HERO -->
+			<section class="sobre-hero">
+				<div class="container">
+					<h1><?php the_title(); ?></h1>
+					<div class="sobre-content">
+						<?php the_content(); ?>
+					</div>
+				</div>
+			</section>
 
-		<div class="grid-6">
-			<h2 class="subtitulo-interno">Valores</h2>
-			<ul>
-				<li>- Qualidade no processo com</li>
-				<li>- Foco no cliente sem perder a</li>
-				<li>- Diversão, preservando a</li>
-				<li>- Natureza com sustentabilidade</li>
-			</ul>
-		</div>
+			<?php
+			$titulo_historia   = get_post_meta(get_the_ID(), 'titulo_historia', true);
+			$titulo_valores    = get_post_meta(get_the_ID(), 'titulo_valores', true);
+			$titulo_qualidade  = get_post_meta(get_the_ID(), 'titulo_qualidade', true);
 
-		<div class="grid-16 foto-equipe">
-			<img src="<?php echo get_template_directory_uri(); ?>/img/equipe-bikcraft.jpg" alt="Equipe Bikcraft">
-		</div>
-	</section>
+			$historia = get_post_meta(get_the_ID(), 'historia', true);
+			$missao   = get_post_meta(get_the_ID(), 'missao', true);
+			$visao    = get_post_meta(get_the_ID(), 'visao', true);
 
-	<section class="qualidade container">
-		<h2 class="subtitulo">Qualidade</h2>
-		<img src="<?php echo get_template_directory_uri(); ?>/img/bikcraft-qualidade.png" alt="Bikcraft">
+			$valores = get_post_meta(get_the_ID(), 'valores', true);
 
-		<ul class="qualidade_lista">
-			<li class="grid-1-3">
-				<h3>Durabilidade</h3>
-				<p>Sólida como pedra, leve como o vento...</p>
-			</li>
-			<li class="grid-1-3">
-				<h3>Design</h3>
-				<p>Feitas sob medida para o melhor conforto...</p>
-			</li>
-			<li class="grid-1-3">
-				<h3>Sustentabilidade</h3>
-				<p>Além de ajudar a cuidar do meio ambiente...</p>
-			</li>
-		</ul>
-	</section>
+			$imagem = get_post_meta(get_the_ID(), 'imagem_equipe', true);
 
-<?php endwhile; endif; ?>
+			$imagem_qualidade = get_post_meta(get_the_ID(), 'imagem_qualidade', true);
+			$itens = get_post_meta(get_the_ID(), 'qualidade_itens', true);
+			?>
+
+			<!-- HISTÓRIA -->
+			<section class="sobre-historia section">
+				<div class="container">
+
+					<?php if ($titulo_historia): ?>
+						<h2><?php echo esc_html($titulo_historia); ?></h2>
+					<?php endif; ?>
+
+					<?php if ($historia): ?>
+						<p><?php echo esc_html($historia); ?></p>
+					<?php endif; ?>
+
+					<?php if ($missao): ?>
+						<p><?php echo esc_html($missao); ?></p>
+					<?php endif; ?>
+
+					<?php if ($visao): ?>
+						<p><?php echo esc_html($visao); ?></p>
+					<?php endif; ?>
+
+				</div>
+			</section>
+
+			<!-- VALORES -->
+			<section class="sobre-valores section">
+				<div class="container">
+
+					<?php if ($titulo_valores): ?>
+						<h2><?php echo esc_html($titulo_valores); ?></h2>
+					<?php endif; ?>
+
+					<ul>
+						<?php if ($valores) :
+							foreach ($valores as $valor) : ?>
+								<li><?php echo esc_html($valor); ?></li>
+						<?php endforeach;
+						endif; ?>
+					</ul>
+
+				</div>
+			</section>
+
+			<!-- EQUIPE -->
+			<section class="sobre-equipe section">
+				<div class="container">
+					<?php if ($imagem): ?>
+						<img src="<?php echo esc_url($imagem); ?>" alt="Equipe">
+					<?php endif; ?>
+				</div>
+			</section>
+
+			<!-- QUALIDADE -->
+			<section class="sobre-qualidade section">
+				<div class="container">
+
+					<div class="qualidade-img">
+						<?php if ($imagem_qualidade): ?>
+							<img src="<?php echo esc_url($imagem_qualidade); ?>" alt="Qualidade">
+						<?php endif; ?>
+					</div>
+
+					<div class="qualidade-content">
+
+						<?php if ($titulo_qualidade): ?>
+							<h2><?php echo esc_html($titulo_qualidade); ?></h2>
+						<?php endif; ?>
+
+						<ul>
+							<?php if ($itens) :
+								foreach ($itens as $item) : ?>
+									<li>
+										<?php if (!empty($item['titulo'])): ?>
+											<h3><?php echo esc_html($item['titulo']); ?></h3>
+										<?php endif; ?>
+
+										<?php if (!empty($item['descricao'])): ?>
+											<p><?php echo esc_html($item['descricao']); ?></p>
+										<?php endif; ?>
+									</li>
+							<?php endforeach;
+							endif; ?>
+						</ul>
+
+					</div>
+
+				</div>
+			</section>
+
+	<?php endwhile;
+	endif; ?>
+
+</main>
 
 <?php get_footer(); ?>

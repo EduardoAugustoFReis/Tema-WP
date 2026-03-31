@@ -1,0 +1,124 @@
+/* ================= SOBRE ================= */
+
+.sobre h1 {
+  font-size: 2.5rem;
+  text-align: center;
+}
+
+/* HERO */
+.sobre-hero {
+  padding: 2rem 0 1rem;
+}
+
+.sobre-content {
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* ================= HISTÓRIA ================= */
+
+.sobre-historia .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-sm);
+  align-items: center;
+}
+
+.sobre-historia h2 {
+  text-align: center;
+}
+
+.sobre-historia p {
+  max-width: 800px;
+  text-align: center;
+}
+
+/* ================= VALORES ================= */
+
+.sobre-valores .container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.sobre-valores h2 {
+  text-align: center;
+}
+
+.sobre-valores ul {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: var(--spacing-md);
+}
+
+.sobre-valores li {
+  background: var(--color-white);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 15px var(--shadow-default);
+  text-align: center;
+  font-weight: bold;
+}
+
+/* ================= EQUIPE ================= */
+
+.sobre-equipe .container {
+  display: flex;
+  justify-content: center;
+}
+
+.sobre-equipe img {
+  border-radius: var(--radius-md);
+}
+
+/* ================= QUALIDADE ================= */
+
+.sobre-qualidade .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--spacing-lg);
+  align-items: center;
+}
+
+.qualidade-img img {
+  border-radius: var(--radius-md);
+}
+
+.qualidade-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.qualidade-content h2 {
+  text-align: center;
+}
+
+.qualidade-content ul {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-md);
+}
+
+.qualidade-content li {
+  background: var(--color-white);
+  padding: var(--spacing-md);
+  border-radius: var(--radius-md);
+  box-shadow: 0 5px 15px var(--shadow-default);
+}
+
+.qualidade-content h3 {
+  margin-bottom: 0.5rem;
+}
+
+/* ================= RESPONSIVO ================= */
+
+@media (max-width: 768px) {
+  .sobre h1 {
+    font-size: 2rem;
+  }
+
+  .sobre-qualidade .container {
+    grid-template-columns: 1fr;
+  }
+}
