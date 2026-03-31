@@ -1,14 +1,36 @@
 <?php
+
 // =========================
-// SUPORTE DO TEMA
+// HELPERS
 // =========================
-function bikecraft_theme_setup()
+function get_page_link_or_default($slug)
 {
-  // Habilita imagem destacada (Featured Image)
-  add_theme_support('post-thumbnails');
+  $page = get_page_by_path($slug);
+  return $page ? get_permalink($page->ID) : '#';
 }
 
-add_action('after_setup_theme', 'bikecraft_theme_setup');
+
+add_filter('show_admin_bar', '__return_true');
+
+
+// =========================
+// SETUP DO TEMA
+// =========================
+function starter_theme_setup()
+{
+  add_theme_support('post-thumbnails');
+
+  // Título automático
+  add_theme_support('title-tag');
+
+  // Logo customizada
+  add_theme_support('custom-logo');
+
+  // HTML5
+  add_theme_support('html5', ['search-form', 'comment-form', 'gallery', 'caption']);
+}
+
+add_action('after_setup_theme', 'starter_theme_setup');
 
 
 // =========================
@@ -23,14 +45,14 @@ require get_template_directory() . '/inc/cmb2/sobre/sobre.php';
 
 
 // =========================
-// ENQUEUE DE CSS - gerenciador de CSS
+// ENQUEUE DE CSS
 // =========================
-function bikecraft_enqueue_assets()
+function starter_theme_enqueue_assets()
 {
   // GLOBAL
   wp_enqueue_style(
-    'bikecraft-style',
-    get_stylesheet_directory_uri() . '/style.css',
+    'starter-theme-style',
+    get_stylesheet_uri(),
     [],
     filemtime(get_template_directory() . '/style.css')
   );
@@ -38,19 +60,19 @@ function bikecraft_enqueue_assets()
   // HOME
   if (is_page_template('page-home.php')) {
     wp_enqueue_style(
-      'bikecraft-home',
+      'starter-theme-home',
       get_template_directory_uri() . '/assets/css/home.css',
-      ['bikecraft-style'],
+      ['starter-theme-style'],
       filemtime(get_template_directory() . '/assets/css/home.css')
     );
   }
 
-  // PRODUTOS (LISTA + PÁGINA INDIVIDUAL)
+  // PRODUTOS
   if (is_post_type_archive('produto') || is_singular('produto')) {
     wp_enqueue_style(
-      'bikecraft-products',
+      'starter-theme-products',
       get_template_directory_uri() . '/assets/css/products.css',
-      ['bikecraft-style'],
+      ['starter-theme-style'],
       filemtime(get_template_directory() . '/assets/css/products.css')
     );
   }
@@ -58,31 +80,31 @@ function bikecraft_enqueue_assets()
   // CONTATO
   if (is_page_template('page-contato.php')) {
     wp_enqueue_style(
-      'bikecraft-contact',
+      'starter-theme-contact',
       get_template_directory_uri() . '/assets/css/contatos.css',
-      ['bikecraft-style'],
+      ['starter-theme-style'],
       filemtime(get_template_directory() . '/assets/css/contatos.css')
     );
   }
 
-  // CONTATO
+  // SOBRE
   if (is_page_template('page-sobre.php')) {
     wp_enqueue_style(
-      'bikecraft-contact',
+      'starter-theme-about',
       get_template_directory_uri() . '/assets/css/sobre.css',
-      ['bikecraft-style'],
+      ['starter-theme-style'],
       filemtime(get_template_directory() . '/assets/css/sobre.css')
     );
   }
 }
 
-add_action('wp_enqueue_scripts', 'bikecraft_enqueue_assets');
+add_action('wp_enqueue_scripts', 'starter_theme_enqueue_assets');
 
 
 // =========================
-// CUSTOM POST TYPE PRODUTO
+// CUSTOM POST TYPE - PRODUTO
 // =========================
-function bikecraft_register_produtos()
+function register_cpt_produtos()
 {
   register_post_type('produto', [
     'labels' => [
@@ -97,18 +119,22 @@ function bikecraft_register_produtos()
   ]);
 }
 
-add_action('init', 'bikecraft_register_produtos');
+add_action('init', 'register_cpt_produtos');
 
 
-// Para usuários NÃO logados
-add_action('admin_post_nopriv_contato_form', 'handle_contato_form');
+// =========================
+// FORMULÁRIO DE CONTATO
+// =========================
 
-// Para usuários logados
-add_action('admin_post_contato_form', 'handle_contato_form');
+// Não logados
+add_action('admin_post_nopriv_handle_contact_form', 'handle_contact_form');
 
-function handle_contato_form()
+// Logados
+add_action('admin_post_handle_contact_form', 'handle_contact_form');
+
+function handle_contact_form()
 {
-  // Verifica campos obrigatórios
+  // Campos obrigatórios
   if (
     empty($_POST['nome']) ||
     empty($_POST['email']) ||
@@ -118,12 +144,13 @@ function handle_contato_form()
     exit;
   }
 
-  if (!empty($_POST['leaveblank']) || $_POST['dontchange'] !== 'http://') {
+  // Honeypot
+  if (!empty($_POST['leaveblank']) || ($_POST['dontchange'] ?? '') !== 'http://') {
     wp_redirect(wp_get_referer() . '?error=1');
     exit;
   }
 
-  // Verifica nonce (segurança)
+  // Nonce
   if (
     !isset($_POST['contato_form_nonce']) ||
     !wp_verify_nonce($_POST['contato_form_nonce'], 'contato_form_action')
@@ -135,17 +162,17 @@ function handle_contato_form()
   // Sanitização
   $nome = sanitize_text_field($_POST['nome']);
   $email = sanitize_email($_POST['email']);
-  $telefone = sanitize_text_field($_POST['telefone']);
+  $telefone = sanitize_text_field($_POST['telefone'] ?? '');
   $mensagem = sanitize_textarea_field($_POST['mensagem']);
 
-  // Validação de email
+  // Validação email
   if (!is_email($email)) {
     wp_redirect(wp_get_referer() . '?error=1');
     exit;
   }
 
-  // Monta email
-  $body = "Nome: $nome\n";
+  // Email
+  $body  = "Nome: $nome\n";
   $body .= "Email: $email\n";
   $body .= "Telefone: $telefone\n\n";
   $body .= "Mensagem:\n$mensagem";
@@ -153,13 +180,10 @@ function handle_contato_form()
   $to = get_option('admin_email');
   $subject = 'Novo contato do site';
 
-  $enviado = wp_mail($to, $subject, $body);
+  $headers = ['Content-Type: text/plain; charset=UTF-8'];
 
-  if ($enviado) {
-    wp_redirect(wp_get_referer() . '?success=1');
-  } else {
-    wp_redirect(wp_get_referer() . '?error=1');
-  }
+  $enviado = wp_mail($to, $subject, $body, $headers);
 
+  wp_redirect(wp_get_referer() . ($enviado ? '?success=1' : '?error=1'));
   exit;
 }

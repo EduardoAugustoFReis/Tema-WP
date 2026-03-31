@@ -7,11 +7,11 @@
     <div class="container">
 
       <h1 class="product-page-title">
-        Nossos Produtos
+        <?php post_type_archive_title(); ?>
       </h1>
 
       <p class="product-page-subtitle">
-        Veja a lista dos nossos produtos abaixo
+        <?php echo esc_html(get_post_type_object('produto')->description ?: 'Veja a lista dos nossos produtos abaixo'); ?>
       </p>
 
     </div>
@@ -20,44 +20,74 @@
   <!-- LISTA -->
   <section class="product-page-container container">
 
-    <?php if (have_posts()) : while (have_posts()) : the_post(); ?>
+    <?php if (have_posts()) : ?>
 
-        <article class="product-card">
+      <div class="product-grid">
 
-          <a href="<?php the_permalink(); ?>" class="product-card__link">
+        <?php while (have_posts()) : the_post(); ?>
 
-            <div class="product-card__image">
-              <?php if (has_post_thumbnail()) : ?>
-                <?php the_post_thumbnail('medium', ['alt' => get_the_title()]); ?>
-              <?php else : ?>
-                <img src="<?php echo get_template_directory_uri(); ?>/assets/img/placeholder.jpg" alt="Imagem padrão">
-              <?php endif; ?>
-            </div>
+          <article <?php post_class('product-card'); ?>>
 
-            <div class="product-card__content">
+            <a href="<?php the_permalink(); ?>" class="product-card__link">
 
-              <h2 class="product-card__title">
-                <?php the_title(); ?>
-              </h2>
+              <div class="product-card__image">
+                <?php if (has_post_thumbnail()) : ?>
 
-              <p class="product-card__description">
-                <?php echo get_the_excerpt(); ?>
-              </p>
+                  <?php the_post_thumbnail('medium', [
+                    'alt' => esc_attr(get_the_title())
+                  ]); ?>
 
-              <span class="product-card__cta">
-                Ver mais →
-              </span>
+                <?php else : ?>
 
-            </div>
+                  <img
+                    src="<?php echo esc_url(get_template_directory_uri() . '/assets/img/placeholder.jpg'); ?>"
+                    alt="Imagem padrão">
 
-          </a>
+                <?php endif; ?>
+              </div>
 
-        </article>
+              <div class="product-card__content">
 
-      <?php endwhile;
-    else : ?>
+                <h2 class="product-card__title">
+                  <?php the_title(); ?>
+                </h2>
 
-      <p>Nenhum produto encontrado.</p>
+                <?php if (has_excerpt()) : ?>
+                  <p class="product-card__description">
+                    <?php echo esc_html(get_the_excerpt()); ?>
+                  </p>
+                <?php endif; ?>
+
+                <span class="product-card__cta">
+                  Ver mais →
+                </span>
+
+              </div>
+
+            </a>
+
+          </article>
+
+        <?php endwhile; ?>
+
+      </div>
+
+      <!-- PAGINAÇÃO -->
+      <div class="pagination">
+        <?php
+        the_posts_pagination([
+          'mid_size' => 2,
+          'prev_text' => '← Anterior',
+          'next_text' => 'Próximo →',
+        ]);
+        ?>
+      </div>
+
+    <?php else : ?>
+
+      <p class="no-results">
+        Nenhum produto encontrado.
+      </p>
 
     <?php endif; ?>
 

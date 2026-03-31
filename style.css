@@ -1,29 +1,27 @@
 /*
-Theme Name: BikeCraft
-Theme URI: https://example.com
+Theme Name: Starter Theme WP
+Description: Tema base reutilizável para projetos WordPress.
 Author: Eduardo
-Author URI: https://example.com
-Description: Tema genérico para projetos WordPress
 Version: 1.0
 */
 
 /* ================= Variáveis globais ================= */
 :root {
-  /* 🎨 Cores principais */
-  --color-primary: #fec63e;
-  --color-primary-dark: #e2b53e;
+  /* Cores principais */
+  --color-primary: #3b82f6;
+  --color-primary-dark: #2563eb;
 
-  /* 🎨 Neutras */
+  /* Neutras */
   --color-bg: #f7f7f7;
   --color-text: #222;
   --color-white: #ffffff;
   --color-black: #000000;
 
-  /* 🎨 Header / Footer */
+  /* Header / Footer */
   --color-header-start: #141414;
   --color-header-end: #141414;
 
-  /* 🎨 Texto secundário */
+  /* Texto secundário */
   --color-text-light: #e2dddd;
 
   /* 🎨 Sombra */
@@ -60,7 +58,7 @@ body {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
-  font-family: Arial, sans-serif;
+  font-family: "Inter", Arial, sans-serif;
   background: var(--color-bg);
   color: var(--color-text);
   padding-top: 5rem;
@@ -72,12 +70,6 @@ main {
 
 body.admin-bar {
   padding-top: calc(5rem + 32px);
-}
-
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 1rem;
 }
 
 img {
@@ -328,7 +320,7 @@ body.admin-bar .site-header {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 0 2rem;
+  padding: .5rem 2rem ;
 }
 
 /* GRID RESPONSIVO PADRÃO */
