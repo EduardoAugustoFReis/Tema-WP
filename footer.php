@@ -11,7 +11,7 @@ $copyright = $footer_settings['footer_copyright']
 ?>
 
 <footer class="site-footer">
-	<div class="footer-container">
+	<div class="container footer-container">
 
 		<!-- INFO -->
 		<div class="footer-info">
@@ -38,7 +38,9 @@ $copyright = $footer_settings['footer_copyright']
 
 						$page_id = $item['link_page'] ?? 0;
 						$text = $item['link_text'] ?? 'Link';
-						$url = $page_id ? get_permalink($page_id) : '#';
+						$url = ($page_id && get_post_status($page_id))
+							? get_permalink($page_id)
+							: home_url('/');
 					?>
 
 						<li>
@@ -90,10 +92,14 @@ $copyright = $footer_settings['footer_copyright']
 
 	</div>
 
+	</div>
+
+
 	<!-- COPYRIGHT -->
 	<div class="footer-copy">
 		<p><?php echo esc_html($copyright); ?></p>
 	</div>
+
 </footer>
 
 <?php wp_footer(); ?>

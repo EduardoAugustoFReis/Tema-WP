@@ -55,7 +55,7 @@
 .contact-form input,
 .contact-form textarea {
   width: 100%;
-  padding: var(--spacing-xs);
+  padding: var(--spacing-sm);
   border-radius: var(--radius-sm);
   border: var(--input-border);
   background: var(--input-bg);
@@ -69,12 +69,14 @@
 }
 
 .contact-form button {
-  width: 10rem;
   cursor: pointer;
   padding: var(--spacing-xs);
   font-size: var(--font-size-md);
   border-radius: var(--radius-sm);
   border: none;
+
+  padding: 1rem;
+
   background-color: var(--color-primary-dark);
   transition: 0.3s;
 }

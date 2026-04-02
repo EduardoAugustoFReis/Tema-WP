@@ -23,7 +23,7 @@
 	?>
 
 	<header class="site-header">
-		<div class="header-container">
+		<div class="container header-container">
 
 			<!-- LOGO -->
 			<div class="header-logo">
@@ -51,7 +51,9 @@
 						<?php foreach ($menu_items as $item) :
 
 							$page_id = !empty($item['link_page']) ? $item['link_page'] : 0;
-							$url = $page_id ? get_permalink($page_id) : '#';
+							$url = ($page_id && get_post_status($page_id))
+								? get_permalink($page_id)
+								: home_url('/');
 							$text = !empty($item['link_text']) ? $item['link_text'] : 'Link';
 
 							// Classe ativo (UX MUITO BOM)

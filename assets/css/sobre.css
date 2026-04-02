@@ -3,16 +3,18 @@
 .sobre h1 {
   font-size: 2.5rem;
   text-align: center;
+  margin-bottom: var(--spacing-md);
 }
 
 /* HERO */
 .sobre-hero {
-  padding: 2rem 0 1rem;
+  padding: 2rem 0 1.5rem;
 }
 
 .sobre-content {
   max-width: 700px;
   margin: 0 auto;
+  text-align: center;
 }
 
 /* ================= HISTÓRIA ================= */
@@ -22,6 +24,7 @@
   flex-direction: column;
   gap: var(--spacing-sm);
   align-items: center;
+  margin-bottom: 1rem;
 }
 
 .sobre-historia h2 {
@@ -39,6 +42,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--spacing-md);
+  margin-bottom: 1rem;
 }
 
 .sobre-valores h2 {
@@ -54,10 +58,10 @@
 .sobre-valores li {
   background: var(--color-white);
   padding: var(--spacing-md);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   box-shadow: 0 5px 15px var(--shadow-default);
   text-align: center;
-  font-weight: bold;
+  font-weight: 600;
 }
 
 /* ================= EQUIPE ================= */
@@ -65,10 +69,11 @@
 .sobre-equipe .container {
   display: flex;
   justify-content: center;
+  margin-bottom: 2rem;
 }
 
 .sobre-equipe img {
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
 }
 
 /* ================= QUALIDADE ================= */
@@ -81,7 +86,7 @@
 }
 
 .qualidade-img img {
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
 }
 
 .qualidade-content {
@@ -103,12 +108,18 @@
 .qualidade-content li {
   background: var(--color-white);
   padding: var(--spacing-md);
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-sm);
   box-shadow: 0 5px 15px var(--shadow-default);
 }
 
 .qualidade-content h3 {
   margin-bottom: 0.5rem;
+}
+
+/* ================= ESPAÇAMENTO FINAL ================= */
+
+.sobre section:last-child {
+  margin-bottom: 4rem;
 }
 
 /* ================= RESPONSIVO ================= */
