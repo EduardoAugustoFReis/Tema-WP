@@ -57,7 +57,7 @@
   width: 100%;
   padding: var(--spacing-sm);
   border-radius: var(--radius-sm);
-  border: var(--input-border);
+  border: var(--shadow-default);
   background: var(--input-bg);
   margin-top: 4px;
   font-size: var(--font-size-md);

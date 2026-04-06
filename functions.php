@@ -28,6 +28,12 @@ function starter_theme_setup()
 
   // HTML5
   add_theme_support('html5', ['search-form', 'comment-form', 'gallery', 'caption']);
+
+
+  add_theme_support('align-wide');
+  add_theme_support('responsive-embeds');
+  add_theme_support('editor-styles');
+  add_theme_support('wp-block-styles');
 }
 
 add_action('after_setup_theme', 'starter_theme_setup');
